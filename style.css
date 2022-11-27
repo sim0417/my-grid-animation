@@ -10,9 +10,16 @@
 
 .wrapper > .item{
   cursor: pointer;
-  background-color: rgb(33, 33, 33);
+  position: relative;
 }
 
-.wrapper > .item:hover{
-  background-color: rgb(66, 66, 66);
+.item:before{
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background-color: rgb(25, 25, 25);
+}
+
+.item:hover:before{
+  background-color: rgb(50, 50, 50);
 }
