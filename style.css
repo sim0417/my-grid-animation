@@ -1,14 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-.wrapper{
-  width:100vw;
-  height:100vh;
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(120deg, #fff6b7, #f77c99, #6578f2, #c2ffd8);
+  background-size: 300% 300%;
+  animation: gradientEffect 10s ease infinite;
+}
+@keyframes gradientEffect {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.grid{
+  width:100%;
+  height:100%;
 
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
+  
+  z-index: 2;
 }
 
-.wrapper > .item{
+.grid > .item{
   cursor: pointer;
   position: relative;
 }
@@ -23,3 +43,91 @@
 .item:hover:before{
   background-color: rgb(50, 50, 50);
 }
+
+.hidden{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  font-size: 7vw;
+}
+
+.hidden p{
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  font-family: 'Lobster', cursive;
+
+}
+
+.hidden strong{
+  color:#ff1678;
+}
+
+
+.title{
+  font-family: 'Lobster', cursive;
+  color: white;
+  font-size: 7vw;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  pointer-events: none;
+  z-index: 3;
+
+  transition: opacity 0.5s ease;
+}
+
+.title strong{
+  color:#1ed5ff;
+}
+
+.wrapper .grid,
+.wrapper .hidden,
+.wrapper .title{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrapper.active .title{
+  opacity: 0;
+}
+
+.wrapper.active .hidden p{
+  opacity: 1;
+}
+
+
+.links{
+  position: absolute;
+  bottom: 1vh;
+  right: 1vw;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+}
+
+.links a{
+  padding: 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  color: rgb(197, 17, 179);
+  text-decoration: none;
+}
+
+.links a:hover{
+  background: rgba(255, 255, 255, 0.9);
+  color: rgb(197, 17, 179);
+}
+
+.links a:not(:last-child){
+  margin-right: 5px;
+}
+
+

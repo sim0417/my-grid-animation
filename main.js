@@ -1,4 +1,4 @@
-const wrapper = document.querySelector('.wrapper');
+const gridElement = document.querySelector('.grid');
 let columns = 0;
 let rows = 0;
 let isToggled = false;
@@ -75,12 +75,18 @@ const showGridAnimation = ({ targetSelector, startAt, columns, rows, attr, inter
   const bottomRowIntervalId = setInterval(intervalBottomRow, interval);
 };
 
+const toggleState = () => {
+  isToggled = !isToggled;
+  document.querySelector('.wrapper').classList.toggle('active');
+};
+
 const onClickGridItem = (x, y) => {
   // console.log(`x : ${x}, y : ${y}`);
-  isToggled = !isToggled;
+
+  toggleState();
 
   showGridAnimation({
-    targetSelector: '.wrapper > .item',
+    targetSelector: '.grid > .item',
     startAt: { column: x, row: y },
     columns,
     rows,
@@ -100,14 +106,14 @@ const makeGridItemElement = (x, y) => {
 };
 
 const makeGridItems = (quantity) => {
-  if (!wrapper || quantity < 1) return;
+  if (!gridElement || quantity < 1) return;
 
   let x = 0;
   let y = 0;
 
   for (let index = 0; index < quantity; index++) {
     const girdItem = makeGridItemElement(x, y);
-    wrapper.appendChild(girdItem);
+    gridElement.appendChild(girdItem);
 
     x++;
     if (x >= columns) {
@@ -118,11 +124,11 @@ const makeGridItems = (quantity) => {
 };
 
 const renderGrid = () => {
-  if (!wrapper) return;
+  if (!gridElement) return;
 
-  wrapper.innerHTML = '';
+  gridElement.innerHTML = '';
 
-  const { clientWidth, clientHeight, style } = wrapper;
+  const { clientWidth, clientHeight, style } = gridElement;
   const itemSize = clientWidth <= 650 ? 40 : 80;
 
   columns = Math.floor(clientWidth / itemSize);
