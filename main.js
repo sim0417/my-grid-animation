@@ -98,6 +98,7 @@ const onClickGridItem = (x, y) => {
 const makeGridItemElement = (x, y) => {
   const girdItem = document.createElement('div');
   girdItem.className = 'item';
+  girdItem.style.opacity = isToggled ? 0 : 1;
   girdItem.addEventListener('click', () => {
     onClickGridItem(x, y);
   });
